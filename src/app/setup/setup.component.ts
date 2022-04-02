@@ -54,6 +54,10 @@ export class SetupComponent implements OnInit, Rule {
   }
 
   ok() {
+    if (!this.domain || !this.resourceTypes.length || !this.from || !this.to) {
+      return
+    }
+
     const data: Rule = {
       domain: this.domain,
       from: this.from,
