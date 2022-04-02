@@ -46,5 +46,12 @@ archive.pipe(output)
 
 // append a file from stream
 
-archive.finalize()
-process.exit(0)
+archive
+  .finalize()
+  .then(() => {
+    console.log('=== build successful ===')
+    process.exit(0)
+  })
+  .catch((e) => {
+    console.log(e)
+  })
