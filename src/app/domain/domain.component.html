@@ -1,0 +1,30 @@
+<div>
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
+    <!-- domain select -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your domain!">
+        <nz-select
+          [(ngModel)]="domainOfSelectedValue"
+          nzMode="tags"
+          formControlName="domain"
+          nzPlaceHolder="Please input domain"
+        >
+          <nz-option
+            *ngFor="let option of domainOfOption"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="destroyModal()">cancel</button>
+  <button nz-button nzType="primary" (click)="ok()">ok</button>
+</div>

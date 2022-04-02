@@ -1,0 +1,16 @@
+export const resourceTypes = [
+  'xmlhttprequest',
+  'script',
+  'main_frame',
+  'sub_frame',
+  'stylesheet',
+  'image',
+  'font',
+  'object',
+  'ping',
+  'csp_report',
+  'media',
+  'websocket',
+  'webtransport',
+  'webbundle',
+]

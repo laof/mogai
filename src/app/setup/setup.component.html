@@ -1,0 +1,91 @@
+<div>
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    class="login-form"
+    (ngSubmit)="submitForm()"
+  >
+    <!-- domain select -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your domain!">
+        <nz-select
+          [(ngModel)]="domain"
+          formControlName="domain"
+          placeholder="domain"
+          nzPlaceHolder="Please select domian"
+        >
+          <nz-option
+            *ngFor="let option of domainOfOption"
+            [nzLabel]="option.label"
+            [nzValue]="option.value"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- type select -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your Password!">
+        <nz-select
+          formControlName="resourceTypes"
+          placeholder="type"
+          nzPlaceHolder="Please select resource types"
+          [(ngModel)]="resourceTypes"
+        >
+          <nz-option
+            *ngFor="let item of typesOfOption"
+            [nzLabel]="item"
+            [nzValue]="item"
+          ></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- from url -->
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your from URL!">
+        <nz-input-group nzPrefixIcon="stop">
+          <input
+            type="text"
+            nz-input
+            formControlName="from"
+            placeholder="from"
+            [(ngModel)]="from"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- to url -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your to URL!">
+        <nz-input-group nzPrefixIcon="redo">
+          <input
+            type="text"
+            nz-input
+            formControlName="to"
+            placeholder="to"
+            [(ngModel)]="to"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- describe -->
+    <nz-form-item>
+      <nz-form-control>
+        <nz-textarea-count [nzMaxCharacterCount]="30">
+          <textarea
+            rows="4"
+            placeholder="describe"
+            formControlName="describe"
+            nz-input
+            [(ngModel)]="describe"
+          ></textarea>
+        </nz-textarea-count>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<div *nzModalFooter>
+  <button nz-button nzType="default" (click)="destroyModal()">cancel</button>
+  <button nz-button nzType="primary" (click)="ok()">ok</button>
+</div>

@@ -1,0 +1,42 @@
+form {
+  padding: 12px;
+}
+
+.main {
+  padding: 24px;
+}
+
+nz-card {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1;
+}
+
+nz-select {
+  width: 380px;
+}
+
+.new-rules {
+  width: 160px;
+}
+
+.btns > * {
+  margin-right: 22px;
+}
+
+.tool-bar {
+  justify-content: space-between;
+}
+
+.danger-btns {
+  flex: inherit;
+
+  > * {
+    margin-left: 12px;
+  }
+}
+
+.del {
+  color: red;
+}
