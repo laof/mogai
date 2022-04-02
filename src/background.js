@@ -96,22 +96,14 @@ function create(list) {
     addRules.push(r)
   })
 
-  const rules = { addRules }
-
-  chrome.declarativeNetRequest.updateDynamicRules(rules, () => {
-    if (chrome.runtime.lastError) {
-      console.error(chrome.runtime.lastError)
-    } else {
-      chrome.declarativeNetRequest.getDynamicRules((list) => console.log(list))
-    }
-  })
+  return addRules
 }
 
 chrome.action.onClicked.addListener(() => {
   chrome.tabs.create({ url: 'index.html' })
 })
 
-chrome.runtime.onMessage.addListener(function (data, sender, sendResponse) {
+chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
   if (!Array.isArray(data)) {
     return true
   }
@@ -119,9 +111,16 @@ chrome.runtime.onMessage.addListener(function (data, sender, sendResponse) {
   chrome.declarativeNetRequest.getDynamicRules((list) => {
     const clear = {
       removeRuleIds: list.map((o) => o.id),
+      addRules: create(data),
     }
     chrome.declarativeNetRequest.updateDynamicRules(clear, () => {
-      create(data)
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError)
+      } else {
+        chrome.declarativeNetRequest.getDynamicRules((list) =>
+          console.log(list),
+        )
+      }
     })
   })
 
