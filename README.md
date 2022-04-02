@@ -1,5 +1,5 @@
 https://ng.ant.design/components/table/zh
 
-chrome extension download
+chrome extension download [mogai.zip](https://raw.githubusercontent.com/laof/mogai_v3/main/mogai.zip)
 
-[migai.zip](https://raw.githubusercontent.com/laof/mogai_v3/main/mogai.zip)
+
