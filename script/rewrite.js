@@ -13,4 +13,6 @@ txt = txt.replace(`onload="this.media='all'"`, '')
 
 fs.writeFileSync(page, txt)
 
+console.log('=== rewrite successful ===')
+
 process.exit(0)
