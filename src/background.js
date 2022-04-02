@@ -20,20 +20,32 @@ const actionTypes = {
   modifyHeaders: 'modifyHeaders',
 }
 
-const domains = ['hao123.com']
+const domains = ['laof.github.io']
 
 const _rules = [
   {
     condition: {
-      domains: ['hao123-static.cdn.bcebos.com', ...domains],
+      domains,
       resourceTypes: [resourceTypes.script],
-      urlFilter:
-        'fe-res/her/static/indexnew/component/hotgoods/hotgoods.144f696.js',
+      urlFilter: 'assets/js/laof.js',
     },
     action: {
       type: actionTypes.redirect,
       redirect: {
         extensionPath: '/files/hi.js',
+      },
+    },
+  },
+  {
+    condition: {
+      domains,
+      resourceTypes: [resourceTypes.xmlhttprequest],
+      urlFilter: 'assets/data/user.json',
+    },
+    action: {
+      type: actionTypes.redirect,
+      redirect: {
+        extensionPath: '/files/test.json',
       },
     },
   },
