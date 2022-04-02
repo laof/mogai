@@ -1,5 +1,3 @@
-https://ng.ant.design/components/table/zh
-
 chrome extension download [mogai.zip](https://raw.githubusercontent.com/laof/mogai_v3/main/mogai.zip)
 
 
@@ -16,3 +14,5 @@ Manifest V3 represents one of the biggest shifts in the extensions platform sinc
 Manifest V3 is part of a shift in the philosophy behind how we approach end-user security and privacy. The pages in this section provide an overview of Manifest V3, the reasons behind it, and how to approach it:
 
 [reference](https://developer.chrome.com/docs/extensions/reference/)
+
+[ng-zorro-antd](https://ng.ant.design/components/table/zh)
