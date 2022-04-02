@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "mogai v3",
+  "version": "3.0.0",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess",
+    "declarativeNetRequestFeedback"
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["files/*"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "action": {},
+  "host_permissions": ["*://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
