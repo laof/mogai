@@ -23,8 +23,8 @@ domain: laof.github.io
 
 ### xmlhttprequest: 
 
-user.json => test.json
+test.json => test.json
 
 ### script: 
 
-laof.js => hi.js
+hi.js => hi.js
