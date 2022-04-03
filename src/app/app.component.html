@@ -1,4 +1,7 @@
-<nz-card [nzBordered]="false" nzTitle="MOGAI" [nzExtra]="extraTemplate">
+<ng-template #cardTitle>
+  <a target="blank" href="https://github.com/laof/mogai_v3">MOGAI</a>
+</ng-template>
+<nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
   <div nz-row class="tool-bar">
     <div nz-col [nzSpan]="18">
       <div class="btns">

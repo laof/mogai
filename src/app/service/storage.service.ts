@@ -28,7 +28,7 @@ class domain extends storage {
     let data = super.get()
 
     if (!data.length) {
-      data = ['localhost', 'laof.github.io']
+      data = ['localhost']
     }
     return data
   }

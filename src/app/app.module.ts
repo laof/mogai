@@ -20,6 +20,8 @@ import { DomainComponent } from './domain/domain.component'
 import { NzCardModule } from 'ng-zorro-antd/card'
 import { NzSwitchModule } from 'ng-zorro-antd/switch'
 import { StartService } from './service/start.service'
+import { NzIconModule } from 'ng-zorro-antd/icon'
+import { icons } from './icon.service'
 const ModuleNZ = [
   NzSwitchModule,
   NzModalModule,
@@ -30,6 +32,7 @@ const ModuleNZ = [
   NzCardModule,
   NzButtonModule,
   NzFormModule,
+  NzIconModule.forRoot(icons),
 ]
 
 registerLocaleData(en)
