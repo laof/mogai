@@ -3,8 +3,14 @@ const fs = require('fs')
 const path = require('path')
 const archiver = require('archiver')
 
+const zip = path.join(__dirname, '..', 'mogai.zip')
+
+if (fs.existsSync(zip)) {
+  fs.unlinkSync(zip)
+}
+
 // create a file to stream archive data to.
-const output = fs.createWriteStream(path.join(__dirname, '..', 'mogai.zip'))
+const output = fs.createWriteStream(zip)
 const archive = archiver('zip', {
   zlib: { level: 9 }, // Sets the compression level.
 })
