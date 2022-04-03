@@ -8,7 +8,8 @@
 /bazel-out
 
 /.angular
-
+/mogai
+mogai.zip
 
 # dependencies
 /node_modules
