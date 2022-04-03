@@ -26,12 +26,11 @@ nz-select {
   width: 160px;
 }
 
-.btns > * {
-  margin-right: 22px;
-}
-
 .tool-bar {
   justify-content: space-between;
+  > * {
+    margin-right: 22px;
+  }
 }
 
 .danger-btns {

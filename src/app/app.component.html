@@ -2,33 +2,26 @@
   <a target="blank" href="https://github.com/laof/mogai_v3">MOGAI</a>
 </ng-template>
 <nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
-  <div nz-row class="tool-bar">
-    <div nz-col [nzSpan]="18">
-      <div class="btns">
-        <button nz-button nzType="primary" class="new-rules" (click)="rmodal()">
-          rules
-        </button>
+  <div class="tool-bar">
+    <button nz-button nzType="primary" class="new-rules" (click)="rmodal()">
+      rules
+    </button>
 
-        <button nz-button nzType="default" (click)="domain()">domain</button>
+    <button nz-button nzType="default" (click)="domain()">domain</button>
 
-        <nz-select
-          placeholder="type"
-          nzShowSearch
-          nzAllowClear
-          nzPlaceHolder="Display by domain"
-          [(ngModel)]="domainValue"
-        >
-          <nz-option
-            *ngFor="let item of domainOfOption"
-            [nzLabel]="item"
-            [nzValue]="item"
-          ></nz-option>
-        </nz-select>
-      </div>
-    </div>
-    <div nz-col [nzSpan]="6" class="danger-btns">
-      <!-- <button nz-button nzType="default" nzDanger (click)="add()">clear</button> -->
-    </div>
+    <nz-select
+      placeholder="type"
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="Display by domain"
+      [(ngModel)]="domainValue"
+    >
+      <nz-option
+        *ngFor="let item of domainOfOption"
+        [nzLabel]="item"
+        [nzValue]="item"
+      ></nz-option>
+    </nz-select>
   </div>
 
   <ng-template #extraTemplate>
