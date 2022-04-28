@@ -138,3 +138,57 @@ chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
 
   return true
 })
+
+
+
+// https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest
+// https://developer.chrome.com/docs/extensions/reference/scripting
+
+//   const arr = [
+//     {
+//       js: ['start.js'],
+//       matches: ['<all_urls>'],
+//       allFrames: true,
+//       id: 'aa',
+//       runAt: 'document_start',
+//     },
+//     {
+//       js: ['end.js'],
+//       matches: ['<all_urls>'],
+//       allFrames: true,
+//       id: 'bb',
+//       runAt: 'document_end',
+//     },
+//     {
+//       js: ['idle.js'],
+//       matches: ['<all_urls>'],
+//       allFrames: true,
+//       id: 'cc',
+//       runAt: 'document_idle',
+//     },
+//   ];
+
+// chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
+//   if (!Array.isArray(data)) {
+//     return true;
+//   }
+
+//   const rules = await chrome.declarativeNetRequest.getDynamicRules();
+//   await chrome.declarativeNetRequest.updateDynamicRules({
+//     removeRuleIds: rules.map((o) => o.id),
+//     addRules: create(data),
+//   });
+
+//   await chrome.scripting.unregisterContentScripts();
+
+//   if (typeof scripting) {
+//     await chrome.scripting.registerContentScripts([]);
+//   }
+
+//   if (chrome.runtime.lastError) {
+//     console.error(chrome.runtime.lastError);
+//   }
+
+//   return sendResponse();
+// });
+
