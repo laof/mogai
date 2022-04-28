@@ -1,60 +1,59 @@
 // storage
 
+import { all_urls } from './default-types.service';
+
 class storage {
   constructor(public key = 'storage') {}
   set(list: any[]) {
     if (Array.isArray(list)) {
-      localStorage.setItem(this.key, JSON.stringify(list))
+      localStorage.setItem(this.key, JSON.stringify(list));
     }
   }
 
   get() {
-    let data = []
+    let data = [];
     try {
-      const str = localStorage.getItem(this.key)
+      const str = localStorage.getItem(this.key);
       if (str) {
-        data = JSON.parse(str)
+        data = JSON.parse(str);
       }
     } catch (e) {}
 
-    return data
+    return data;
   }
 }
-
 
 class domain extends storage {
-  constructor(key:string) { super(key) }
+  constructor(key: string) {
+    super(key);
+  }
   override get() {
-    let data = super.get()
+    let data = super.get();
 
     if (!data.length) {
-      data = ['localhost']
+      data = [all_urls];
     }
-    return data
+    return data;
   }
 }
 
+class single {
+  constructor(public key: string) {}
 
-class single  {
-  constructor(public key:string) { }
-
-   get(){
-
-    if(!localStorage.hasOwnProperty(this.key)){
-      this.set(true)
-      return true
+  get() {
+    if (!localStorage.hasOwnProperty(this.key)) {
+      this.set(true);
+      return true;
     }
 
-    return  !!localStorage.getItem(this.key)
+    return !!localStorage.getItem(this.key);
   }
 
-   set(b: boolean){
-    return localStorage.setItem(this.key, b? '1':'')
+  set(b: boolean) {
+    return localStorage.setItem(this.key, b ? '1' : '');
   }
 }
 
-
-export const TableStorage = new storage('list')
-export const DomainStorage = new domain('domain')
-export const SwitchStorage = new single('switch')
-
+export const TableStorage = new storage('list');
+export const DomainStorage = new domain('domain');
+export const SwitchStorage = new single('switch');

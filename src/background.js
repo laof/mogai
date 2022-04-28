@@ -1,38 +1,38 @@
 const resourceTypes = {
-  xmlhttprequest: 'xmlhttprequest',
-  stylesheet: 'stylesheet',
-  script: 'script',
-  main_frame: 'main_frame',
-  sub_frame: 'sub_frame',
-  image: 'image',
-  font: 'font',
-  object: 'object',
-  ping: 'ping',
-  csp_report: 'csp_report',
-  media: 'media',
-  websocket: 'websocket',
-  webtransport: 'webtransport',
-  webbundle: 'webbundle',
-}
+  xmlhttprequest: "xmlhttprequest",
+  stylesheet: "stylesheet",
+  script: "script",
+  main_frame: "main_frame",
+  sub_frame: "sub_frame",
+  image: "image",
+  font: "font",
+  object: "object",
+  ping: "ping",
+  csp_report: "csp_report",
+  media: "media",
+  websocket: "websocket",
+  webtransport: "webtransport",
+  webbundle: "webbundle",
+};
 
 const actionTypes = {
-  redirect: 'redirect',
-  modifyHeaders: 'modifyHeaders',
-}
+  redirect: "redirect",
+  modifyHeaders: "modifyHeaders",
+};
 
-const domains = ['laof.github.io']
+const domains = ["laof.github.io"];
 
 const _rules = [
   {
     condition: {
       domains,
       resourceTypes: [resourceTypes.script],
-      urlFilter: 'assets/js/laof.js',
+      urlFilter: "assets/js/laof.js",
     },
     action: {
       type: actionTypes.redirect,
       redirect: {
-        extensionPath: '/files/hi.js',
+        extensionPath: "/files/hi.js",
       },
     },
   },
@@ -40,12 +40,12 @@ const _rules = [
     condition: {
       domains,
       resourceTypes: [resourceTypes.xmlhttprequest],
-      urlFilter: 'assets/data/user.json',
+      urlFilter: "assets/data/user.json",
     },
     action: {
       type: actionTypes.redirect,
       redirect: {
-        extensionPath: '/files/test.json',
+        extensionPath: "/files/test.json",
       },
     },
   },
@@ -58,37 +58,44 @@ const _rules = [
       type: actionTypes.modifyHeaders,
       requestHeaders: [
         {
-          header: 'X-DeclarativeNetRequest-Sample',
-          operation: 'set',
-          value: '1-request',
+          header: "X-DeclarativeNetRequest-Sample",
+          operation: "set",
+          value: "1-request",
         },
       ],
       responseHeaders: [
         {
-          header: 'X-DeclarativeNetRequest-Sample',
-          operation: 'set',
-          value: '2-response',
+          header: "X-DeclarativeNetRequest-Sample",
+          operation: "set",
+          value: "2-response",
         },
       ],
     },
   },
-]
+];
 
 // run
 
-function create(list) {
-  const addRules = []
+const ruletType = {
+  inject: 0,
+  forward: 1,
+};
+
+function createRequest(arr) {
+  const addRules = [];
+
+  const list = arr.filter((data) => data.type == ruletType.forward);
 
   list.forEach((obj, i) => {
-    let redirect = {}
-    i++
+    let redirect = {};
+    i++;
 
-    if (obj.to.startsWith('http')) {
-      redirect.url = obj.to
+    if (obj.to.startsWith("http")) {
+      redirect.url = obj.to;
     } else {
       redirect = {
-        extensionPath: '/files/' + obj.to,
-      }
+        extensionPath: "/files/forward/" + obj.to,
+      };
     }
 
     const r = {
@@ -103,43 +110,59 @@ function create(list) {
         type: actionTypes.redirect,
         redirect,
       },
-    }
+    };
 
-    addRules.push(r)
-  })
+    addRules.push(r);
+  });
 
-  return addRules
+  return addRules;
+}
+
+function createInject(arr) {
+  const addInject = [];
+  const list = arr.filter((data) => data.type == ruletType.inject);
+
+  list.forEach((obj, i) => {
+    const data = {
+      js: ["/files/inject/" + obj.to],
+      matches: [obj.domain],
+      allFrames: true,
+      id: obj.id,
+      runAt: obj.run,
+    };
+    addInject.push(data);
+  });
+
+  return addInject;
 }
 
 chrome.action.onClicked.addListener(() => {
-  chrome.tabs.create({ url: 'index.html' })
-})
+  chrome.tabs.create({ url: "index.html" });
+});
 
-chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
+  sendResponse({});
   if (!Array.isArray(data)) {
-    return true
+    return true;
   }
 
-  chrome.declarativeNetRequest.getDynamicRules((list) => {
-    const clear = {
-      removeRuleIds: list.map((o) => o.id),
-      addRules: create(data),
-    }
-    chrome.declarativeNetRequest.updateDynamicRules(clear, () => {
-      if (chrome.runtime.lastError) {
-        console.error(chrome.runtime.lastError)
-      } else {
-        chrome.declarativeNetRequest.getDynamicRules((list) =>
-          console.log(list),
-        )
-      }
-    })
-  })
+  const rules = await chrome.declarativeNetRequest.getDynamicRules();
+  await chrome.declarativeNetRequest.updateDynamicRules({
+    removeRuleIds: rules.map((o) => o.id),
+    addRules: createRequest(data),
+  });
 
-  return true
-})
+  await chrome.scripting.unregisterContentScripts();
 
+  const js = createInject(data);
+  if (js.length) {
+    await chrome.scripting.registerContentScripts(js);
+  }
 
+  if (chrome.runtime.lastError) {
+    console.error(chrome.runtime.lastError);
+  }
+});
 
 // https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest
 // https://developer.chrome.com/docs/extensions/reference/scripting
@@ -191,4 +214,3 @@ chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
 
 //   return sendResponse();
 // });
-

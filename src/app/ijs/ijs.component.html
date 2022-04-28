@@ -28,7 +28,7 @@
         <nz-select
           formControlName="resourceTypes"
           placeholder="type"
-          nzPlaceHolder="Please select resource types"
+          nzPlaceHolder="Please select inject types"
           [(ngModel)]="run"
         >
           <nz-option
@@ -39,30 +39,16 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <!-- from url -->
+    <!-- js url -->
 
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your from URL!">
-        <nz-input-group nzPrefixIcon="stop">
-          <input
-            type="text"
-            nz-input
-            formControlName="from"
-            placeholder="from"
-            [(ngModel)]="from"
-          />
-        </nz-input-group>
-      </nz-form-control>
-    </nz-form-item>
-    <!-- to url -->
-    <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your to URL!">
-        <nz-input-group nzPrefixIcon="redo">
+      <nz-form-control nzErrorTip="Please input your js files!">
+        <nz-input-group>
           <input
             type="text"
             nz-input
             formControlName="to"
-            placeholder="to"
+            placeholder="javascript"
             [(ngModel)]="to"
           />
         </nz-input-group>

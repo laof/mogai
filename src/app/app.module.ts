@@ -21,7 +21,8 @@ import { NzCardModule } from 'ng-zorro-antd/card'
 import { NzSwitchModule } from 'ng-zorro-antd/switch'
 import { StartService } from './service/start.service'
 import { NzIconModule } from 'ng-zorro-antd/icon'
-import { icons } from './icon.service'
+import { icons } from './icon.service';
+import { IjsComponent } from './ijs/ijs.component'
 const ModuleNZ = [
   NzSwitchModule,
   NzModalModule,
@@ -42,7 +43,7 @@ export function loadFactory(loadService: StartService): Function {
 }
 
 @NgModule({
-  declarations: [AppComponent, SetupComponent, DomainComponent],
+  declarations: [AppComponent, SetupComponent, DomainComponent, IjsComponent],
   imports: [
     BrowserModule,
     CommonModule,

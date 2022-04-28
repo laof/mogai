@@ -3,6 +3,9 @@
 </ng-template>
 <nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
   <div class="tool-bar">
+    <button nz-button nzType="primary" class="new-rules" (click)="ijs()">
+      Ijs
+    </button>
     <button nz-button nzType="primary" class="new-rules" (click)="rmodal()">
       rules
     </button>
@@ -37,9 +40,8 @@
     <thead>
       <tr>
         <th>domain</th>
-        <th>from</th>
-        <th>to</th>
-        <th>resource types</th>
+        <th>url</th>
+        <th>resource type/run</th>
         <th>describe</th>
         <th>action</th>
       </tr>
@@ -49,13 +51,12 @@
         <tr *ngIf="domainValue ? data.domain == domainValue : true">
           <td>{{ data.domain }}</td>
           <td>
-            <a href="javascript:;" (click)="rmodal(data)">
-              {{ data.from }}
+            <a href="javascript:;" (click)="pop(data)">
+              {{ data.type == 0 ? data.to : data.from + " => " + data.to }}
             </a>
           </td>
-          <td>{{ data.to }}</td>
           <td>
-            {{ data.resourceTypes }}
+            {{ data.run }}
           </td>
           <td>{{ data.describe }}</td>
           <td><a class="del" (click)="del(data.id)">delete</a></td>
