@@ -149,28 +149,34 @@ chrome.action.onClicked.addListener(() => {
   chrome.tabs.create({ url: "index.html" });
 });
 
-chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
-  sendResponse();
+chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
   if (!Array.isArray(data)) {
+    sendResponse({ status: "ok" });
     return true;
   }
 
-  const rules = await chrome.declarativeNetRequest.getDynamicRules();
-  await chrome.declarativeNetRequest.updateDynamicRules({
-    removeRuleIds: rules.map((o) => o.id),
-    addRules: createRequest(data),
-  });
+  (async () => {
+    const rules = await chrome.declarativeNetRequest.getDynamicRules();
+    await chrome.declarativeNetRequest.updateDynamicRules({
+      removeRuleIds: rules.map((o) => o.id),
+      addRules: createRequest(data),
+    });
 
-  await chrome.scripting.unregisterContentScripts();
+    await chrome.scripting.unregisterContentScripts();
 
-  const js = createInject(data);
-  if (js.length) {
-    await chrome.scripting.registerContentScripts(js);
-  }
+    const js = createInject(data);
+    if (js.length) {
+      await chrome.scripting.registerContentScripts(js);
+    }
 
-  if (chrome.runtime.lastError) {
-    console.error(chrome.runtime.lastError);
-  }
+    if (chrome.runtime.lastError) {
+      console.error(chrome.runtime.lastError);
+    }
+
+    sendResponse({ status: "ok" });
+  })();
+
+  return true;
 });
 
 // https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest
