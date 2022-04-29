@@ -1,10 +1,11 @@
 import { environment } from 'src/environments/environment';
 
-export function sender(data: any[]) {
+export function sender(data: any[]): Promise<any> {
   if (environment.production) {
     // @ts-ignore
-    chrome.runtime.sendMessage(data).then((response) => {});
+    return chrome.runtime.sendMessage(data);
   } else {
     console.log(data);
+    return Promise.resolve(data);
   }
 }

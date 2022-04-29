@@ -31,6 +31,16 @@ export class AppComponent {
 
   ngOnInit(): void {}
 
+  resetart() {
+    const id = this.message.loading('service is restarting, please wait ...', {
+      nzDuration: 0,
+    }).messageId;
+    setTimeout(() => {
+      this.message.remove(id);
+    }, 1000);
+    sender([]).then(() => sender(this.data));
+  }
+
   ijs(loca?: Rule) {
     const eemit = new EventEmitter();
 
@@ -61,17 +71,6 @@ export class AppComponent {
       TableStorage.set(this.data);
       this.update();
     });
-  }
-
-  resetart() {
-    this.switchChange(false);
-    const id = this.message.loading('service is restarting, please wait ...', {
-      nzDuration: 0,
-    }).messageId;
-    setTimeout(() => {
-      this.switchChange(true);
-      this.message.remove(id);
-    }, 1500);
   }
 
   pop(data: Rule) {
