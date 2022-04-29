@@ -7,6 +7,7 @@ import { SwitchStorage, TableStorage } from './service/storage.service';
 import { guid } from './service/tools';
 import { SetupComponent } from './setup/setup.component';
 import { IjsComponent } from './ijs/ijs.component';
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,10 @@ export class AppComponent {
   domainValue = '';
   switchValue = SwitchStorage.get();
 
-  constructor(private modalService: NzModalService) {
+  constructor(
+    private modalService: NzModalService,
+    private message: NzMessageService
+  ) {
     this.update(false);
   }
 
@@ -57,6 +61,17 @@ export class AppComponent {
       TableStorage.set(this.data);
       this.update();
     });
+  }
+
+  resetart() {
+    this.switchChange(false);
+    const id = this.message.loading('service is restarting, please wait ...', {
+      nzDuration: 0,
+    }).messageId;
+    setTimeout(() => {
+      this.switchChange(true);
+      this.message.remove(id);
+    }, 1500);
   }
 
   pop(data: Rule) {

@@ -28,6 +28,19 @@
   </div>
 
   <ng-template #extraTemplate>
+    <button
+      (click)="resetart()"
+      class="restart"
+      nz-button
+      title="restart"
+      nzType="primary"
+      nzSize="small"
+      nzGhost
+      [disabled]="!switchValue"
+      nzShape="circle"
+    >
+      R
+    </button>
     <nz-switch
       (ngModelChange)="switchChange($event)"
       [(ngModel)]="switchValue"
