@@ -1,1 +1,1 @@
-console.log("inject.js");
+console.log("mogai.test.inject.js");

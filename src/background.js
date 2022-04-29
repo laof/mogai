@@ -20,9 +20,11 @@ const actionTypes = {
   modifyHeaders: "modifyHeaders",
 };
 
+const all_urls = "<all_urls>";
+
 const domains = ["laof.github.io"];
 
-const _rules = [
+const test = [
   {
     condition: {
       domains,
@@ -102,8 +104,7 @@ function createRequest(arr) {
       id: i,
       priority: 1,
       condition: {
-        domains: [obj.domain],
-        resourceTypes: [obj.resourceTypes],
+        resourceTypes: [obj.run],
         urlFilter: obj.from,
       },
       action: {
@@ -112,9 +113,12 @@ function createRequest(arr) {
       },
     };
 
+    if (obj.domain != all_urls) {
+      r.condition.domains = [obj.domain];
+    }
+
     addRules.push(r);
   });
-
   return addRules;
 }
 
@@ -123,9 +127,14 @@ function createInject(arr) {
   const list = arr.filter((data) => data.type == ruletType.inject);
 
   list.forEach((obj, i) => {
+    let matches = "*://" + obj.domain + "/*";
+    if (obj.domain == all_urls) {
+      matches = all_urls;
+    }
+
     const data = {
       js: ["/files/inject/" + obj.to],
-      matches: [obj.domain],
+      matches: [matches],
       allFrames: true,
       id: obj.id,
       runAt: obj.run,
@@ -141,7 +150,7 @@ chrome.action.onClicked.addListener(() => {
 });
 
 chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
-  sendResponse({});
+  sendResponse();
   if (!Array.isArray(data)) {
     return true;
   }
@@ -165,7 +174,10 @@ chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
 });
 
 // https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest
+// https://developer.chrome.com/docs/extensions/reference/declarativeNetRequest/#type-URLTransform
+
 // https://developer.chrome.com/docs/extensions/reference/scripting
+// https://developer.chrome.com/docs/extensions/mv3/match_patterns
 
 //   const arr = [
 //     {
@@ -175,42 +187,4 @@ chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
 //       id: 'aa',
 //       runAt: 'document_start',
 //     },
-//     {
-//       js: ['end.js'],
-//       matches: ['<all_urls>'],
-//       allFrames: true,
-//       id: 'bb',
-//       runAt: 'document_end',
-//     },
-//     {
-//       js: ['idle.js'],
-//       matches: ['<all_urls>'],
-//       allFrames: true,
-//       id: 'cc',
-//       runAt: 'document_idle',
-//     },
 //   ];
-
-// chrome.runtime.onMessage.addListener(async (data, sender, sendResponse) => {
-//   if (!Array.isArray(data)) {
-//     return true;
-//   }
-
-//   const rules = await chrome.declarativeNetRequest.getDynamicRules();
-//   await chrome.declarativeNetRequest.updateDynamicRules({
-//     removeRuleIds: rules.map((o) => o.id),
-//     addRules: create(data),
-//   });
-
-//   await chrome.scripting.unregisterContentScripts();
-
-//   if (typeof scripting) {
-//     await chrome.scripting.registerContentScripts([]);
-//   }
-
-//   if (chrome.runtime.lastError) {
-//     console.error(chrome.runtime.lastError);
-//   }
-
-//   return sendResponse();
-// });

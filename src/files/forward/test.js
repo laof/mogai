@@ -1,1 +1,1 @@
-console.log("test.forware.js");
+console.log("mogai.test.forward.js");
