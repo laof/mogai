@@ -6,7 +6,7 @@
     "start": "ng serve",
     "rewrite": "node script/rewrite.js",
     "zip": "node script/zip.js",
-    "build": "npm run ng build && npm run rewrite && npm run zip",
+    "build": "ng build && npm run rewrite && npm run zip",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
