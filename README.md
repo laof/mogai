@@ -25,6 +25,6 @@ domain: laof.github.io
 
 test.json => test.json
 
-### script: 
+### script:  
 
 hi.js => hi.js
