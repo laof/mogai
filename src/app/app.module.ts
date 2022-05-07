@@ -24,7 +24,12 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { icons } from './icon.service';
 import { IjsComponent } from './ijs/ijs.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { CloudComponent } from './cloud/cloud.component';
+import { NzListModule } from 'ng-zorro-antd/list';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 const ModuleNZ = [
+  NzSpinModule,
+  NzListModule,
   NzMessageModule,
   NzSwitchModule,
   NzModalModule,
@@ -45,7 +50,7 @@ export function loadFactory(loadService: StartService): Function {
 }
 
 @NgModule({
-  declarations: [AppComponent, SetupComponent, DomainComponent, IjsComponent],
+  declarations: [AppComponent, SetupComponent, DomainComponent, IjsComponent, CloudComponent],
   imports: [
     BrowserModule,
     CommonModule,

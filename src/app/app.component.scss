@@ -7,7 +7,8 @@ form {
 }
 
 .restart {
-  margin-right: 24px;
+  font-size: 12px;
+  margin-right: 0;
 }
 
 .title {
@@ -23,16 +24,20 @@ nz-card {
 }
 
 nz-select {
-  width: 380px;
+  flex: 1;
 }
 
 .new-rules {
-  width: 160px;
+  width: 140px;
+}
+
+.download-ijs{
+  width: 52px;
 }
 
 .tool-bar {
-  justify-content: space-between;
-  > * {
+  display: flex;
+  > *:not(.restart) {
     margin-right: 22px;
   }
 }

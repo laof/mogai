@@ -8,6 +8,7 @@ import { guid } from './service/tools';
 import { SetupComponent } from './setup/setup.component';
 import { IjsComponent } from './ijs/ijs.component';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { CloudComponent } from './cloud/cloud.component';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,22 @@ export class AppComponent {
       this.message.remove(id);
     }, 1000);
     sender([]).then(() => sender(this.data));
+  }
+
+  download() {
+    const eemit = new EventEmitter();
+    this.modalService.create({
+      nzTitle: 'Download JS',
+      nzWidth: 700,
+      nzAfterClose: eemit,
+      nzMaskClosable: true,
+      nzContent: CloudComponent,
+    });
+    eemit.subscribe((res: any) => {
+      if (!res) {
+        return;
+      }
+    });
   }
 
   ijs(loca?: Rule) {

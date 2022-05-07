@@ -1,0 +1,29 @@
+name: Mogai
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: npm run build
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+      - run: npm run build
+
+    - uses: JamesIves/github-pages-deploy-action@v4.3.3
+      with:
+        token: ${{ secrets.CDAPK }}
+        folder: build
+        repository-name: laof/blob
+        target-folder: files
+        branch: main
+        clean: false
+        force: false
+        commit-message: cicd:deploy mogai.zip by action

@@ -3,6 +3,9 @@
 </ng-template>
 <nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
   <div class="tool-bar">
+
+    <button nz-button nzType="primary" class="download-ijs" (click)="download()"><i nz-icon nzType="cloud"></i></button>
+
     <button nz-button nzType="primary" class="new-rules" (click)="ijs()">
       Ijs
     </button>
@@ -25,22 +28,22 @@
         [nzValue]="item"
       ></nz-option>
     </nz-select>
-  </div>
 
-  <ng-template #extraTemplate>
     <button
       (click)="resetart()"
       class="restart"
       nz-button
       title="restart"
       nzType="primary"
-      nzSize="small"
-      nzGhost
+      nzDanger
       [disabled]="!switchValue"
-      nzShape="circle"
     >
-      R
+      <i nz-icon nzType="reload" nzTheme="outline"></i>
+      Restart
     </button>
+  </div>
+
+  <ng-template #extraTemplate>
     <nz-switch
       (ngModelChange)="switchChange($event)"
       [(ngModel)]="switchValue"
