@@ -22,7 +22,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 import { StartService } from './service/start.service';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { icons } from './icon.service';
-import { IjsComponent } from './ijs/ijs.component';
+import { InsertComponent } from './insert/insert.component';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { CloudComponent } from './cloud/cloud.component';
 import { NzListModule } from 'ng-zorro-antd/list';
@@ -50,7 +50,7 @@ export function loadFactory(loadService: StartService): Function {
 }
 
 @NgModule({
-  declarations: [AppComponent, SetupComponent, DomainComponent, IjsComponent, CloudComponent],
+  declarations: [AppComponent, SetupComponent, DomainComponent, InsertComponent, CloudComponent],
   imports: [
     BrowserModule,
     CommonModule,

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "mogai v3",
+  "name": "mogai",
   "version": "3.0.0",
   "permissions": [
     "storage",

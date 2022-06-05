@@ -2,30 +2,29 @@ import { Component, OnInit } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { NzModalRef } from 'ng-zorro-antd/modal'
 import { activeType, Rule } from '../data.types'
-import { resourceTypes } from '../service/default-types.service'
+import { injectType } from '../service/default-types.service'
 import { DomainStorage } from '../service/storage.service'
 
 @Component({
-  selector: 'app-setup',
-  templateUrl: './setup.component.html',
-  styleUrls: ['./setup.component.scss'],
-  providers: [FormBuilder],
+  templateUrl: './insert.component.html',
+  styleUrls: ['./insert.component.scss'],
 })
-export class SetupComponent implements OnInit, Rule {
+export class InsertComponent implements OnInit, Rule {
   // parmarter start
   domain = ''
   from = ''
-  to = ''
-  use = false
-  type: activeType = activeType.forward
+  js = ''
+  css = ''
   run = []
   describe = ''
+  use: boolean = false
   id = ''
+  type: activeType = activeType.inject
 
   // end
 
-  typesOfOption: string[] = resourceTypes
-  typesOfSelectedValue = [resourceTypes[0]]
+  typesOfOption: string[] = injectType
+  typesOfSelectedValue = [injectType[0]]
 
   domainOfOption: any[] = []
 
@@ -44,7 +43,8 @@ export class SetupComponent implements OnInit, Rule {
 
     this.validateForm = this.fb.group({
       from: [null, [Validators.required]],
-      to: [null, [Validators.required]],
+      js: [null],
+      css: [null],
       resourceTypes: [null, [Validators.required]],
       domain: [null, [Validators.required]],
       describe: [null],
@@ -56,16 +56,17 @@ export class SetupComponent implements OnInit, Rule {
   }
 
   ok() {
-    if (!this.domain || !this.run.length || !this.from || !this.to) {
+    if (!this.domain || !this.run.length || (!this.js && !this.css)) {
       return
     }
 
     const data: Rule = {
-      use: true,
       domain: this.domain,
-      type: activeType.forward,
-      from: this.from,
-      to: this.to,
+      js: this.js,
+      css: this.css,
+      from: '',
+      use: true,
+      type: activeType.inject,
       run: this.run,
       describe: this.describe,
       id: '',

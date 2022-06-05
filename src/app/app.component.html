@@ -1,13 +1,19 @@
 <ng-template #cardTitle>
-  <a target="blank" href="https://github.com/laof/mogai_v3">MOGAI</a>
+  <a target="blank" href="https://github.com/laof/mogai">MOGAI</a>
 </ng-template>
 <nz-card [nzBordered]="false" [nzTitle]="cardTitle" [nzExtra]="extraTemplate">
   <div class="tool-bar">
+    <button
+      nz-button
+      nzType="primary"
+      class="download-ijs"
+      (click)="download()"
+    >
+      <i nz-icon nzType="cloud"></i>
+    </button>
 
-    <button nz-button nzType="primary" class="download-ijs" (click)="download()"><i nz-icon nzType="cloud"></i></button>
-
-    <button nz-button nzType="primary" class="new-rules" (click)="ijs()">
-      Ijs
+    <button nz-button nzType="primary" class="new-rules" (click)="insert()">
+      insert
     </button>
     <button nz-button nzType="primary" class="new-rules" (click)="rmodal()">
       rules
@@ -60,15 +66,20 @@
         <th>resource type/run</th>
         <th>describe</th>
         <th>action</th>
+        <th>use</th>
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let data of smallTable.data">
+      <ng-container *ngFor="let data of smallTable.data; let i = index">
         <tr *ngIf="domainValue ? data.domain == domainValue : true">
           <td>{{ data.domain }}</td>
           <td>
             <a href="javascript:;" (click)="pop(data)">
-              {{ data.type == 0 ? data.to : data.from + " => " + data.to }}
+              {{
+                data.type == 0
+                  ? formatterInsert(data)
+                  : data.from + ' => ' + data.to
+              }}
             </a>
           </td>
           <td>
@@ -76,6 +87,16 @@
           </td>
           <td>{{ data.describe }}</td>
           <td><a class="del" (click)="del(data.id)">delete</a></td>
+          <td>
+            <span class="status" (click)="itemUpdate(i)">
+              <ng-container *ngIf="data.use; else ref">
+                <i nz-icon nzType="close" nzTheme="outline"></i>
+              </ng-container>
+              <ng-template #ref>
+                <i nz-icon nzType="check" nzTheme="outline"></i>
+              </ng-template>
+            </span>
+          </td>
         </tr>
       </ng-container>
     </tbody>

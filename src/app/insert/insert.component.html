@@ -22,6 +22,7 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
+
     <!-- type select -->
     <nz-form-item>
       <nz-form-control nzErrorTip="Please input your Password!">
@@ -47,9 +48,24 @@
           <input
             type="text"
             nz-input
-            formControlName="to"
+            formControlName="js"
             placeholder="javascript"
-            [(ngModel)]="to"
+            [(ngModel)]="js"
+          />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- css url -->
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Please input your css files!">
+        <nz-input-group>
+          <input
+            type="text"
+            nz-input
+            formControlName="css"
+            placeholder="css"
+            [(ngModel)]="css"
           />
         </nz-input-group>
       </nz-form-control>

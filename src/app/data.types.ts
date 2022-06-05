@@ -4,14 +4,17 @@ export enum activeType {
 }
 
 export interface Rule {
-  id: string;
-  domain: string;
-  from?: string;
-  to: string;
-  type: activeType;
-  run: string[];
-  resourceType?: string[];
-  describe: string;
+  id: string
+  domain: string
+  from?: string
+  to?: string
+  js?: string
+  css?: string
+  type: activeType
+  run: string[]
+  use: boolean
+  resourceType?: string[]
+  describe: string
 }
 
-export type Domain = string[];
+export type Domain = string[]

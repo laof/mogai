@@ -31,7 +31,7 @@ nz-select {
   width: 140px;
 }
 
-.download-ijs{
+.download-ijs {
   width: 52px;
 }
 
@@ -40,6 +40,11 @@ nz-select {
   > *:not(.restart) {
     margin-right: 22px;
   }
+}
+
+.status {
+  cursor: pointer;
+  user-select: none;
 }
 
 .danger-btns {
