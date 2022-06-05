@@ -90,10 +90,10 @@
           <td>
             <span class="status" (click)="itemUpdate(i)">
               <ng-container *ngIf="data.use; else ref">
-                <i nz-icon nzType="close" nzTheme="outline"></i>
+                <i nz-icon nzType="check" nzTheme="outline"></i>
               </ng-container>
               <ng-template #ref>
-                <i nz-icon nzType="check" nzTheme="outline"></i>
+                <i nz-icon nzType="close" nzTheme="outline"></i>
               </ng-template>
             </span>
           </td>
