@@ -1,6 +1,6 @@
 // storage
 
-import { all_urls } from './default-types.service';
+import { all_urls,blogcsdnnet } from './default-types.service';
 
 class storage {
   constructor(public key = 'storage') {}
@@ -31,7 +31,7 @@ class domain extends storage {
     let data = super.get();
 
     if (!data.length) {
-      data = [all_urls];
+      data = [all_urls,blogcsdnnet];
     }
     return data;
   }

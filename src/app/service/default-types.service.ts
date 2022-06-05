@@ -13,8 +13,9 @@ export const resourceTypes = [
   'websocket',
   'webtransport',
   'webbundle',
-];
+]
 
-export const injectType = ['document_idle', 'document_start', 'document_end'];
+export const injectType = ['document_idle', 'document_start', 'document_end']
 
-export const all_urls = '<all_urls>';
+export const all_urls = '<all_urls>'
+export const blogcsdnnet = 'blog.csdn.net'
