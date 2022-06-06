@@ -20,7 +20,7 @@ export class AppComponent {
   domainOfSelectedValue: string[] = []
   domainOfOption: any[] = []
 
-  domainValue = ''
+  domainValue: any = null;
   switchValue = SwitchStorage.get()
 
   constructor(
