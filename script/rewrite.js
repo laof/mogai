@@ -1,6 +1,8 @@
 const fs = require('fs')
 const path = require('path')
 
+fs.copyFileSync('./update/update.exe', './mogai/update.exe')
+
 // create a file to stream archive data to.
 const page = path.join(__dirname, '..', 'mogai', 'index.html')
 
